@@ -29,7 +29,24 @@ You may study `testCaclulate1` as a sample. This test case should make a connect
 
 What benefit do we have from having integration tests in our project?
 ```
-Your though here
-```
+integration tests play a crucial role in ensuring that different parts of your software application work together as intended, which is essential for delivering a reliable and robust product.
+For example
+@Test
+    public void testCaclulate3() {
+
+        // Make a HTTP GET request to retrieve the last created Parolee.
+        try (Response response = client.target(WEB_URI+"?weight=70&height=1.8").request().get()) {
+
+            // Check that the HTTP response code is 200 OK.
+            int responseCode = response.getStatus();
+            assertEquals(200, responseCode);
+
+            String jsonResponse = response.readEntity(String.class);
+            assertThat(jsonResponse, CoreMatchers.containsString("Result is 22"));
+
+            assertThat(jsonResponse, CoreMatchers.containsString("normal"));
+            _logger.info("IT1 test passed");
+        }
+    }```
 
 
